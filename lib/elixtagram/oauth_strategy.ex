@@ -4,7 +4,7 @@ defmodule Elixtagram.OAuthStrategy do
   alias OAuth2.Strategy.AuthCode
   alias Elixtagram.Config
 
-  @scopes ~w(comments relationships likes public_content follower_list)
+  @scopes ~w(user_media user_profile)
 
   # Public API
   def new do

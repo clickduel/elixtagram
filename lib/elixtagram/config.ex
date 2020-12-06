@@ -30,7 +30,7 @@ defmodule Elixtagram.Config do
     Agent.get(__MODULE__, fn config -> config end)
   end
 
-  defp set(key, value) do
+  def set(key, value) do
     Agent.update(__MODULE__, fn config ->
       Map.update!(config, key, fn _ -> value end)
     end)

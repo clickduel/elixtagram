@@ -4,7 +4,7 @@ defmodule Elixtagram.API.Base do
   """
   alias Elixtagram.Config
 
-  @base_url "https://api.instagram.com/v1"
+  @base_url "https://graph.instagram.com"
 
   @json_library Application.get_env(:elixtagram, :json_library, Jason)
 
@@ -43,15 +43,17 @@ defmodule Elixtagram.API.Base do
 
   defp handle_response(data) do
     response = @json_library.decode!(data.body, keys: :atoms)
-    case response do
-      %{code: 200} ->
+    case data do
+      %{status_code: 200} ->
         response
       %{code: code} ->
-        raise(Elixtagram.Error, [code: code, message: "#{response.error_type}: #{response.error_message}"])
-      %{meta: %{code: 200}} ->
-        response
-      %{meta: %{code: code}} ->
-        raise(Elixtagram.Error, [code: code, message: "#{response.meta.error_type}: #{response.meta.error_message}"])
+        raise(Elixtagram.Error, [code: code, message: "#{response.error.message}"])
+      %{status_code: 400} ->
+        raise(Elixtagram.Error, [message: "#{response.error.message}"])
+      # %{meta: %{code: 200}} ->
+      #   response
+      # %{meta: %{code: code}} ->
+      #   raise(Elixtagram.Error, [code: code, message: "#{response.meta.error_type}: #{response.meta.error_message}"])
     end
   end
 
