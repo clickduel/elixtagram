@@ -25,7 +25,7 @@ defmodule Elixtagram.Mixfile do
 
   defp deps do
     [
-      {:httpoison, "~> 1.7"},
+      {:httpoison, "~> 1.8"},
       {:jason, "~> 1.0", optional: true},
       {:oauth2, "~> 0.9.1"},
       {:exvcr, "~> 0.10.3", only: [:dev, :test]},
