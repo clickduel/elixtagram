@@ -15,7 +15,11 @@ defmodule Elixtagram.API.Users do
   @doc """
   Fetches a list of recent media posted by a user
   """
-  def user(user_id, params \\ [["fields", "account_type,id,media_count,username"]], token \\ :global) do
+  def user(
+        user_id,
+        params \\ [["fields", "account_type,id,media_count,username"]],
+        token \\ :global
+      ) do
     get("/#{user_id}", token, params) |> parse_user
   end
 end
